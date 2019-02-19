@@ -1,0 +1,46 @@
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/">{{title}}</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="Navber">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/users/index">ユーザ<span class="sr-only">ユーザ</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/reservations/index">予約<span class="sr-only">予約</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/equipments/index">機材<span class="sr-only">機材</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/studios/index">スタジオ<span class="sr-only">スタジオ</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/class-equipments/index">機材種別<span class="sr-only">機材種別</span></a>
+        </li>
+        <!--<li class="nav-item dropdown">-->
+          <!--<a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+            <!--メニュー-->
+          <!--</a>-->
+          <!--<div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+            <!--<a class="dropdown-item" href="/users/index">Users</a>-->
+            <!--<a class="dropdown-item" href="/scheduler">Scheduler</a>-->
+            <!--<div class="dropdown-divider"></div>-->
+            <!--<a class="dropdown-item" href="/logout">ログアウト</a>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+        <!--<a class="nav-link disabled" href="#">無効</a>-->
+        <!--</li>-->
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+</header>

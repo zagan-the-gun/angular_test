@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>スタジオ登録</h1>
+  <form>
+
+    <div class="form-group">
+      <label for="name">名前</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="studio.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="description">説明</label>
+      <input type="text" class="form-control" id="description"
+             required
+             [(ngModel)]="studio.description" name="description">
+    </div>
+
+    <button (click)="add();">
+      add
+    </button>
+
+  </form>
+</div>

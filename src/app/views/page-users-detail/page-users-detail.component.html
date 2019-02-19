@@ -1,0 +1,84 @@
+<div class="container">
+  <h1>ユーザ編集</h1>
+  <form>
+
+    <div class="form-group">
+      <label for="name">氏名</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="user.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="kana">カナ</label>
+      <input type="text" class="form-control" id="kana"
+             required
+             [(ngModel)]="user.kana" name="kana">
+    </div>
+
+    <div class="form-group">
+      <label for="phone">電話番号</label>
+      <input type="text" class="form-control" id="phone"
+             required
+             [(ngModel)]="user.phone" name="phone">
+    </div>
+
+    <div class="form-group">
+      <label for="email">メール</label>
+      <input type="text" class="form-control" id="email"
+             required
+             [(ngModel)]="user.email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="createdId">作成者</label>
+      <div *ngFor="let user of users">
+        <div  *ngIf="user.id==user.createdId">
+          <input type="text" class="form-control" id="createdId"
+                 readonly="readonly"
+                 [(ngModel)]="user.name" name="createdId">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="updatedId">更新者</label>
+      <div *ngFor="let user of users">
+        <div  *ngIf="user.id==user.updatedId">
+          <input type="text" class="form-control" id="updatedId"
+                 readonly="readonly"
+                 [(ngModel)]="user.name" name="updatedId">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="createdAt">作成日時</label>
+      <input type="text" class="form-control" id="createdAt"
+             readonly="readonly"
+             [ngModel]="user.createdAt | date: 'yyyy/MM/dd HH:mm:ss'" name="createdAt">
+    </div>
+
+    <div class="form-group">
+      <label for="updatedAt">更新日時</label>
+      <input type="text" class="form-control" id="updatedAt"
+             readonly="readonly"
+             [ngModel]="user.updatedAt | date: 'yyyy/MM/dd HH:mm:ss'" name="updatedAt">
+    </div>
+
+    <div *ngIf="user.deletedAt">
+      <div class="form-group">
+        <label for="deletedAt">削除日時</label>
+        <input type="text" class="form-control" id="deletedAt"
+               readonly="readonly"
+               [ngModel]="user.deletedAt | date: 'yyyy/MM/dd HH:mm:ss'" name="deletedAt">
+      </div>
+    </div>
+
+    <button (click)="goBack()">go back</button>
+    <button (click)="save();">
+      save
+    </button>
+
+  </form>
+</div>

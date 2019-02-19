@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>機材登録</h1>
+  <form>
+    <div class="form-group">
+      <label for="name">名前</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="equipment.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="description">説明</label>
+      <input type="text" class="form-control" id="description"
+             required
+             [(ngModel)]="equipment.description" name="description">
+    </div>
+
+    <div class="form-group">
+      <label for="classEquipment">機材種別</label>
+      <select class="form-control" id="classEquipment"
+              required
+              [(ngModel)]="equipment.classEquipmentId" name="classEquipmentId">
+        <option *ngFor="let classEquipment of classEquipments" [value]="classEquipment.id">{{classEquipment.name}}</option>
+      </select>
+    </div>
+
+
+    <!--<div class="form-group">-->
+      <!--<label for="classEquipmentId">機材種別</label>-->
+      <!--<input type="text" class="form-control" id="classEquipmentId"-->
+             <!--required-->
+             <!--[(ngModel)]="equipment.classEquipmentId" name="classEquipmentId">-->
+    <!--</div>-->
+
+    <button (click)="add();">
+      add
+    </button>
+
+  </form>
+</div>

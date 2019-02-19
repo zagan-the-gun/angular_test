@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>機材種別登録</h1>
+  <form>
+
+    <div class="form-group">
+      <label for="name">名前</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="classEquipment.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="details">説明</label>
+      <input type="text" class="form-control" id="details"
+             required
+             [(ngModel)]="classEquipment.details" name="details">
+    </div>
+
+    <button (click)="add();">
+      add
+    </button>
+
+  </form>
+</div>

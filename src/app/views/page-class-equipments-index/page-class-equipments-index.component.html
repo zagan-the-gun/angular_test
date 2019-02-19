@@ -1,0 +1,14 @@
+<h2>Class Equipments</h2>
+
+<div class="content">
+  <a routerLink="/class-equipments/new">new</a>
+  <ul class="classEquipments">
+    <li *ngFor="let classEquipment of classEquipments">
+      <a routerLink="/class-equipments/detail/{{classEquipment.id}}">
+        <span class="badge">{{classEquipment.id}}</span> {{classEquipment.name}}
+      </a>
+      <button class="delete" title="delete classEquipment"
+              (click)="delete(classEquipment)">x</button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,14 @@
+<h2>Equipments</h2>
+
+<div class="content">
+  <a routerLink="/equipments/new">new</a>
+  <ul class="equipments">
+    <li *ngFor="let equipment of equipments">
+      <a routerLink="/equipments/detail/{{equipment.id}}">
+        <span class="badge">{{equipment.id}}</span> {{equipment.name}}
+      </a>
+      <button class="delete" title="delete equipment"
+      (click)="delete(equipment)">x</button>
+    </li>
+  </ul>
+</div>

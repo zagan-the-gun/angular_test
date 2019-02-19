@@ -1,0 +1,206 @@
+<div class="container">
+  <h1>機材予約フォーム</h1>
+  <form>
+
+    <!--<input type="text" class="form-control" id="name"-->
+           <!--required-->
+           <!--[(ngModel)]="reservation.name" name="name">-->
+    <!--TODO: remove this: {{reservation.name}}-->
+
+    <div class="form-group">
+      <label for="name">予約名</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="reservation.name" name="name">
+    </div>
+    <!--name: {{reservation.name}}-->
+
+    <div class="form-group">
+      <label for="description">説明</label>
+      <input type="text" class="form-control" id="description"
+             [(ngModel)]="reservation.description" name="description">
+    </div>
+
+
+    <!--作成日時:{{reservation.createdAt | date:"yyyy/MM/dd HH:mm:ss"}}-->
+
+    <!--<div class="form-group">-->
+      <!--&lt;!&ndash;<label for="lendingStartAt">予約期間</label>&ndash;&gt;-->
+      <!--<label>利用開始日時: </label>-->
+        <!--<input class="input-wrapper" required-->
+               <!--[owlDateTimeTrigger]="dt12" [owlDateTime]="dt12"-->
+               <!--[(ngModel)]="startAt" name="startAt"-->
+               <!--[selectMode]="'rangeFrom'">-->
+        <!--<owl-date-time #dt12></owl-date-time>-->
+
+      <!--<label>利用終了日時: </label>-->
+        <!--<input class="input-wrapper" required-->
+               <!--[owlDateTimeTrigger]="dt13" [owlDateTime]="dt13"-->
+               <!--[(ngModel)]="endAt" name="endAt"-->
+               <!--[selectMode]="'rangeTo'">-->
+        <!--<owl-date-time #dt13></owl-date-time>-->
+    <!--</div>-->
+    <!--lendingStartAt: {{startAt | date:"yyyy/MM/dd HH:mm"}}-->
+    <!--<br />-->
+    <!--lendingEndAt: {{endAt | date:"yyyy/MM/dd HH:mm"}}-->
+
+    <div class="form-group">
+      <label>予約日時:</label>
+      <input class="form-control" [(ngModel)]="selectedMoments" name="selectedMoments"
+             [selectMode]="'range'" required
+             [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
+      <owl-date-time #dtPicker3></owl-date-time>
+    </div>
+    <!--lendingEndAt: {{selectedMoments[0] | date:"yyyy/MM/dd HH:mm"}}-->
+    <!--<br />-->
+    <!--lendingEndAt: {{selectedMoments[1] | date:"yyyy/MM/dd HH:mm"}}-->
+
+    <div class="form-group">
+      <label for="user">予約者</label>
+      <select class="form-control" id="user"
+              required
+              [(ngModel)]="reservation.userId" name="user">
+        <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+      </select>
+    </div>
+
+    <!-- 複数選択可能に変更する -->
+    <!--<div class="form-group">-->
+      <!--<label for="equipment">機材</label>-->
+      <!--<select class="form-control" id="equipment"-->
+              <!--required-->
+              <!--[(ngModel)]="reservation.equipmentId" name="equipment">-->
+        <!--<option *ngFor="let equipment of equipments" [value]="equipment.id">{{equipment.name}}</option>-->
+      <!--</select>-->
+    <!--</div>-->
+
+
+
+    <!--<div class="form-group">classEquipments-->
+      <!--<ul class="nav nav-tabs">-->
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-link active">タブ1</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-link">タブ3</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item" *ngFor="let classEquipment of classEquipments">-->
+          <!--<a class="nav-link">{{classEquipment.name}}</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+
+
+
+    <label>機材</label>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <!--<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">ホーム</a>-->
+        <!--<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">プロフィール</a>-->
+        <!--<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">コンタクト</a>-->
+        <a class="nav-item nav-link" *ngFor="let classEquipment of classEquipments" id="nav-equipment-tab" data-toggle="tab" href="#{{classEquipment.name}}" role="tab" aria-controls="classEquipment.name" aria-selected="false">{{classEquipment.name}}</a>
+      </div>
+    </nav>
+
+    <div class="form-group tab-content mt-3" id="nav-tabContent">
+      <!--<div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">ホームの文章です。...</div>-->
+      <!--<div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">プロフィールの文章です。...</div>-->
+      <!--<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">コンタクトの文章です。...</div>-->
+      <div class="tab-pane fade" *ngFor="let classEquipment of classEquipments" id="{{classEquipment.name}}" role="tabpanel" aria-labelledby="nav-equipment-tab">
+        <div *ngFor="let equipment of equipments">
+          <div *ngIf="equipment.classEquipmentId==classEquipment.id">
+            <label class="checkbox-inline">
+              <input type="checkbox" [(ngModel)]="equipment.reservationStatus" name="equipment" id="equipment">{{equipment.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let equipment of equipments">
+      <div *ngIf='equipment.reservationStatus==1'>
+        {{equipment.name}}
+      </div>
+    </div>
+
+    <!--<div class="form-group">-->
+      <!--<label for="classEquipment">機材種別</label>-->
+      <!--<select class="form-control" id="classEquipment"-->
+              <!--required>-->
+        <!--<option *ngFor="let classEquipment of classEquipments" [value]="classEquipment.id">{{classEquipment.name}}</option>-->
+      <!--</select>-->
+    <!--</div>-->
+
+
+    <div class="form-group">
+      <label for="studio">スタジオ</label>
+      <select class="form-control" id="studio"
+              required
+              [(ngModel)]="reservation.studioId" name="studio">
+        <option *ngFor="let studio of studios" [value]="studio.id">{{studio.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="comment">コメント</label>
+      <input type="text" class="form-control" id="comment"
+             [(ngModel)]="reservation.comment" name="comment">
+    </div>
+
+    <!--<button type="submit" class="btn btn-success">Submit</button>-->
+    <button (click)="add();">
+      add
+    </button>
+
+  </form>
+</div>
+
+<!--<div>-->
+  <!--<label>Reservation name:-->
+    <!--<input #reservationName />-->
+  <!--</label>-->
+
+  <!--<label>予約名-->
+    <!--<input [(ngModel)]="asdf.name" placeholder="name"/>-->
+  <!--</label>-->
+  <!--<label>説明-->
+    <!--<input [(ngModel)]="reservation.description" placeholder="description"/>-->
+  <!--</label>-->
+  <!--<br />-->
+  <!--<div *ngFor="let reservation of reservations">-->
+    <!--予約名{{reservation.id}}-->
+  <!--</div>-->
+  <!--<label>予約者名-->
+    <!--<select id="user" placeholder="予約者" required>-->
+      <!--<option *ngFor="let user of users" [value]="user.id">-->
+        <!--{{user.name}}-->
+      <!--</option>-->
+    <!--</select>-->
+  <!--</label>-->
+  <!--<label>機材-->
+    <!--<select id="equipment" placeholder="機材" required>-->
+      <!--<option *ngFor="let equipment of equipments" [value]="equipment.id">-->
+        <!--{{equipment.name}}-->
+      <!--</option>-->
+    <!--</select>-->
+    <!--<br />-->
+  <!--</label>-->
+  <!--<br />-->
+  <!--<label>スタジオ-->
+    <!--<select id="studio" placeholder="スタジオ" required>-->
+      <!--<option *ngFor="let studio of studios" [value]="studio.id">-->
+        <!--{{studio.name}}-->
+      <!--</option>-->
+    <!--</select>-->
+  <!--</label>-->
+  <!--<br />-->
+  <!--<label>コメント-->
+    <!--<input [(ngModel)]="reservation.comment" placeholder="comment"/>-->
+  <!--</label>-->
+  <!--<br />-->
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <!--<button (click)="add(reservationName.value); reservationName.value=''">-->
+    <!--add-->
+  <!--</button>-->
+<!--</div>-->

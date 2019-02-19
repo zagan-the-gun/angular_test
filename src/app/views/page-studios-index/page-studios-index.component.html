@@ -1,0 +1,14 @@
+<h2>Studios</h2>
+
+<div class="content">
+  <a routerLink="/studios/new">new</a>
+  <ul class="studios">
+    <li *ngFor="let studio of studios">
+      <a routerLink="/studios/detail/{{studio.id}}">
+        <span class="badge">{{studio.id}}</span> {{studio.name}}
+      </a>
+      <button class="delete" title="delete studio"
+      (click)="delete(studio)">x</button>
+    </li>
+  </ul>
+</div>

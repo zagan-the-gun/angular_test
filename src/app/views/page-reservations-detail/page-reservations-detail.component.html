@@ -1,0 +1,126 @@
+<div class="container">
+  <h1>予約編集</h1>
+  <form>
+
+    <div class="form-group">
+      <label for="name">予約名</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="reservation.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="description">説明</label>
+      <input type="text" class="form-control" id="description"
+             [(ngModel)]="reservation.description" name="description">
+    </div>
+
+    <div class="form-group">
+      <label>予約日時:</label>
+      <input class="form-control" [(ngModel)]="selectedMoments" name="selectedMoments"
+             [selectMode]="'range'" required
+             [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
+      <owl-date-time #dtPicker3></owl-date-time>
+    </div>
+
+    <div class="form-group">
+      <label for="user">予約者</label>
+      <select class="form-control" id="user"
+              required
+              [(ngModel)]="reservation.userId" name="user">
+        <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+      </select>
+    </div>
+
+    <label>機材</label>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link" *ngFor="let classEquipment of classEquipments" id="nav-equipment-tab" data-toggle="tab" href="#{{classEquipment.name}}" role="tab" aria-controls="classEquipment.name" aria-selected="false">{{classEquipment.name}}</a>
+      </div>
+    </nav>
+
+    <div class="form-group tab-content mt-3" id="nav-tabContent">
+      <div class="tab-pane fade" *ngFor="let classEquipment of classEquipments" id="{{classEquipment.name}}" role="tabpanel" aria-labelledby="nav-equipment-tab">
+        <div *ngFor="let equipment of equipments">
+          <div *ngIf="equipment.classEquipmentId==classEquipment.id">
+            <label class="checkbox-inline">
+              <input type="checkbox" [(ngModel)]="equipment.reservationStatus" name="equipment" id="equipment">{{equipment.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let equipment of equipments">
+      <div *ngIf='equipment.reservationStatus==1'>
+        {{equipment.name}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="studio">スタジオ</label>
+      <select class="form-control" id="studio"
+              required
+              [(ngModel)]="reservation.studioId" name="studio">
+        <option *ngFor="let studio of studios" [value]="studio.id">{{studio.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="comment">コメント</label>
+      <input type="text" class="form-control" id="comment"
+             [(ngModel)]="reservation.comment" name="comment">
+    </div>
+
+    <div class="form-group">
+      <label for="createdId">作成者</label>
+      <div *ngFor="let user of users">
+        <div  *ngIf="user.id==reservation.createdId">
+          <input type="text" class="form-control" id="createdId"
+                 readonly="readonly"
+                 [(ngModel)]="user.name" name="createdId">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="updatedId">更新者</label>
+      <div *ngFor="let user of users">
+        <div  *ngIf="user.id==reservation.updatedId">
+          <input type="text" class="form-control" id="updatedId"
+                 readonly="readonly"
+                 [(ngModel)]="user.name" name="updatedId">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="createdAt">作成日時</label>
+      <input type="text" class="form-control" id="createdAt"
+             readonly="readonly"
+             [ngModel]="reservation.createdAt | date: 'yyyy/MM/dd HH:mm:ss'" name="createdAt">
+    </div>
+
+    <div class="form-group">
+      <label for="updatedAt">更新日時</label>
+      <input type="text" class="form-control" id="updatedAt"
+             readonly="readonly"
+             [ngModel]="reservation.updatedAt | date: 'yyyy/MM/dd HH:mm:ss'" name="updatedAt">
+    </div>
+
+    <div *ngIf="reservation.deletedAt">
+      <div class="form-group">
+        <label for="deletedAt">削除日時</label>
+        <input type="text" class="form-control" id="deletedAt"
+               readonly="readonly"
+               [ngModel]="reservation.deletedAt | date: 'yyyy/MM/dd HH:mm:ss'" name="deletedAt">
+      </div>
+    </div>
+
+    <button (click)="goBack()">go back</button>
+    <button (click)="save();">
+      save
+    </button>
+
+  </form>
+</div>
